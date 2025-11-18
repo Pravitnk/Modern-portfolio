@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* --------------------------
+   Global Styles / Theme Tokens
+--------------------------- */
+
+/* 1. CSS Variables (Your Color System) */
+:root {
+  --color-primary: #6366f1;
+  --color-primary-dark: #4f46e5;
+  --color-accent: #06b6d4;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --text-main: #0f172a;
+  --text-soft: #64748b;
+
+  --radius-xl: 1rem;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3. Global Font Setup */
+body {
+  font-family: "Inter", ui-sans-serif, system-ui;
+  background: var(--color-bg);
+  color: var(--text-main);
+}
+
+/* Optional class for headings */
+.heading-font {
+  font-family: "Poppins", "Inter", sans-serif;
+}
