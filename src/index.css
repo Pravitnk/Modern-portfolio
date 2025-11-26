@@ -25,12 +25,26 @@ html {
 
 /* 3. Global Font Setup */
 body {
-  font-family: "Inter", ui-sans-serif, system-ui;
-  background: var(--color-bg);
-  color: var(--text-main);
+  font-family: "poppins", sans-serif;
+  
 }
 
+h1,h2{
+  font-family: "roboto", sans-serif;
+}
 /* Optional class for headings */
 .heading-font {
-  font-family: "Poppins", "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+@layer utilities {
+  .bg-gradient {
+    background : linear-gradient(-45deg, #302b63, #00bf8f, #1cd8d2);
+  }
+  /* .text-primary {
+    color: var(--color-primary);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  } */
 }
