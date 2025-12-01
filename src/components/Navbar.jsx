@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import OverlayMenu from "./OverlayMenu";
-import logo from "../assets/Logo (1).png";
+import logo from "../assets/Logo1.png";
 import { FiMenu } from "react-icons/fi";
 
 const Navbar = () => {
@@ -8,17 +8,25 @@ const Navbar = () => {
   const [visible, setVisible] = useState(true);
   const [forceVisible, setForceVisible] = useState(false);
 
-  const lastSrcollY = useRef(0);
+  const lastScrollY = useRef(
+    typeof window !== "undefined" ? window.scrollY : 0
+  );
   const timerId = useRef(null);
 
-  //home section visible navbar all the time
   useEffect(() => {
     const homeSection = document.querySelector("#home");
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          // Make navbar persist while home is visible
           setForceVisible(true);
           setVisible(true);
+
+          // Clear any pending hide timeouts when we force it visible
+          if (timerId.current) {
+            clearTimeout(timerId.current);
+            timerId.current = null;
+          }
         } else {
           setForceVisible(false);
         }
@@ -26,41 +34,65 @@ const Navbar = () => {
       { threshold: 0.1 }
     );
 
-    if (homeSection) observer.observe(homeSection); //observes
+    if (homeSection) observer.observe(homeSection);
 
     return () => {
-      if (homeSection) observer.unobserve(homeSection); //whn unmount clean up
+      if (homeSection) observer.unobserve(homeSection);
     };
   }, []);
 
-  //when not on nav and scroll up and hold for 3 sec
+  // Show navbar on scroll up, hide on scroll down; hide after 3s of idle scroll-up only when not forcing visible
   useEffect(() => {
     const handleScroll = () => {
       if (forceVisible) {
+        // If home is visible, ensure navbar stays visible and no timers run
         setVisible(true);
+        if (timerId.current) {
+          clearTimeout(timerId.current);
+          timerId.current = null;
+        }
+        // Update lastScrollY so future direction checks are correct
+        lastScrollY.current = window.scrollY;
         return;
       }
-      const currentScrollY = window.scrollY; // crrnt scroll position
 
-      if (currentScrollY > lastSrcollY.current) {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY.current) {
+        // Scrolling down -> hide immediately
         setVisible(false);
+        if (timerId.current) {
+          clearTimeout(timerId.current);
+          timerId.current = null;
+        }
       } else {
+        // Scrolling up -> show, then hide after 3s if no further interaction
         setVisible(true);
 
-        if (timerId.current) clearTimeout(timerId.current);
-        timerId.current -
-          setTimeout(() => {
-            setVisible(false);
-          }, 3000);
+        // reset existing timer
+        if (timerId.current) {
+          clearTimeout(timerId.current);
+        }
+
+        timerId.current = setTimeout(() => {
+          setVisible(false);
+          timerId.current = null;
+        }, 3000);
       }
-      lastSrcollY.current = currentScrollY;
+
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // initialize lastScrollY when effect mounts to avoid weird first-run behavior
+    lastScrollY.current = window.scrollY;
 
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timerId.current) clearTimeout(timerId.current);
+      if (timerId.current) {
+        clearTimeout(timerId.current);
+        timerId.current = null;
+      }
     };
   }, [forceVisible]);
 

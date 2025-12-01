@@ -11,7 +11,7 @@ import Experience from "./pages/Experience";
 import Contact from "./pages/Contact";
 import Testimonial from "./pages/testimonial";
 import Navbar from "./components/Navbar";
-import ParticleBackground from "./components/ParticleBackground";
+// import ParticleBackground from "./components/ParticleBackground";
 import CustomCursor from "./components/CustomCursor";
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
       <Router>
         {/* <Header /> */}
         <CustomCursor />
-        <ParticleBackground />
+        {/* <ParticleBackground /> */}
         <Navbar />
         <Home />
         <About />
