@@ -1,7 +1,7 @@
 import React from "react";
 
 const Experience = () => {
-  return <div>Experience</div>;
+  return <div className="w-full h-screen">Experience</div>;
 };
 
 export default Experience;
