@@ -21,7 +21,7 @@ const Home = () => {
     const current = roles[index];
     const timeout = setTimeout(
       () => {
-        if (!deleting && subIndex < current.length) subIndex((v) => v + 1);
+        if (!deleting && subIndex < current.length) setSubIndex((v) => v + 1);
         else if (!deleting && subIndex === current.length)
           setTimeout(() => {
             setDeleting(true);
@@ -34,7 +34,6 @@ const Home = () => {
       },
       deleting ? 40 : 60
     );
-    console.log(current);
 
     return () => {
       clearTimeout(timeout);
@@ -74,7 +73,25 @@ const Home = () => {
         {/* left side */}
         <div className="flex flex-col justify-center text-center h-full lg:text-left relative">
           <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
-            <motion.div className=""></motion.div>
+            <motion.div
+              className="mb-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <span>{roles[index].substring(0, subIndex)}</span>
+              <span
+                className="inline-block w-[2px ml-1 bg-white animate-pulse align-middle]"
+                style={{ height: "1em" }}
+              ></span>
+            </motion.div>
+
+            <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r">
+              Hello, I'am <br />
+              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap">
+                Pravit Naik
+              </span>
+            </motion.h1>
           </div>
         </div>
       </div>
@@ -83,4 +100,9 @@ const Home = () => {
 };
 
 export default Home;
-8956402770;
+// Intro Animation : “Hello”
+// —------------------------------------------------
+
+// "Hello", "नमस्ते", "Hola", "Bonjour",
+//       "Ciao", "Olá", "Здравствуйте",
+//       "Merhaba", "Γειά", "Hej", "Hallo", "Salam"
