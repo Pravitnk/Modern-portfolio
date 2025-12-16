@@ -26,10 +26,6 @@ const glowVariants = {
   tap: { scale: 0.95, y: 0, transition: { duration: 0.08 } },
 };
 const Home = () => {
-  console.log("ParticleBackground:", ParticleBackground);
-  console.log("typeof ParticleBackground:", typeof ParticleBackground);
-  console.log("motion:", motion);
-  console.log("typeof motion:", typeof motion);
   const roles = useMemo(
     () => [
       "Web Developer",
@@ -98,8 +94,8 @@ const Home = () => {
 
       <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
         {/* left side */}
-        <div className="flex flex-col justify-center text-center h-full lg:text-left relative">
-          <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
+        <div className="flex flex-col text-center justify-center h-full lg:text-left relative">
+          <div className="w-full mt-20 ml-24 lg:pr-24 mx-auto max-w-[48rem]">
             <motion.div
               className="mb-1 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 12 }}
@@ -215,9 +211,3 @@ const Home = () => {
 };
 
 export default Home;
-// Intro Animation : “Hello”
-// —------------------------------------------------
-
-// "Hello", "नमस्ते", "Hola", "Bonjour",
-//       "Ciao", "Olá", "Здравствуйте",
-//       "Merhaba", "Γειά", "Hej", "Hallo", "Salam"

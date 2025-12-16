@@ -19,7 +19,7 @@ const OverlayMenu = ({ isOpen, onClose }) => {
         >
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 text-white text-3xl"
+            className="absolute top-5 right-5 text-white text-3xl cursor-pointer"
           >
             <FiXCircle />
           </button>
