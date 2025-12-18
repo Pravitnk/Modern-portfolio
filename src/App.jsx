@@ -21,23 +21,22 @@ const App = () => {
 
       {introDone && (
         <div className="relative bg-gradient text-white min-h-screen">
-          <Router>
-            <CustomCursor />
-            {/* <ParticleBackground /> */}
-            <Navbar />
-            <Home />
-            <About />
-            <Skills />
-            <Projects />
-            <Experience />
-            <Testimonial />
-            <Contact />
-            <Footer />
-            <Routes>
-              {/* <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} /> */}
-            </Routes>
-          </Router>
+          {/* <Router> */}
+          <CustomCursor />
+          <Navbar />
+          <Home />
+          <About />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Testimonial />
+          <Contact />
+          <Footer />
+          {/* <Routes>
+              <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            </Routes> */}
+          {/* </Router> */}
         </div>
       )}
     </>

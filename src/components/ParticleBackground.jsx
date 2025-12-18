@@ -6,9 +6,10 @@ const ParticleBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+
     let particlesArray = [];
     const particlesCount = 50;
-    const colors = ["#ffffff", "#ffcccc", "#ccffcc", "#ccccff"];
+    const colors = ["rgba(255,255,255,0.7)"];
 
     class Particle {
       constructor() {
@@ -22,7 +23,7 @@ const ParticleBackground = () => {
 
       draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
         ctx.fillStyle = this.color;
@@ -33,8 +34,10 @@ const ParticleBackground = () => {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
 
         this.draw();
       }
@@ -66,15 +69,15 @@ const ParticleBackground = () => {
     animate();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
     <canvas
-      className="fixed top-0 left-0 h-full pointer-events-none z-0"
       ref={canvasRef}
+      className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
     ></canvas>
   );
 };

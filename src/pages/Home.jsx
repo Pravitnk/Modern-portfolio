@@ -64,7 +64,10 @@ const Home = () => {
   }, [subIndex, index, deleting, roles]);
 
   return (
-    <section id="home" className="w-full h-screen bg-black overflow-hidden">
+    <section
+      id="home"
+      className="relative w-full h-screen bg-black overflow-hidden"
+    >
       <ParticleBackground />
       <div className="absolute inset-0">
         <div
@@ -128,7 +131,7 @@ const Home = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               I am a passionate Web Developer, I turn complex ideas into
-              seamless, high-impact web experiences - building modern, scalable
+              seamless, high-impact web experiences building modern, scalable
               and lightening fast application that make a difference.
             </motion.p>
 
